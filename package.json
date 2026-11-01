@@ -1,0 +1,41 @@
+{
+  "name": "branddorrado",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev:client": "npm -w client run dev",
+    "dev:server": "npm -w server run dev",
+    "build": "npm -w client run build",
+    "db:push": "npm -w server run db:push",
+    "seed": "npm -w server run seed",
+    "clean": "rm -rf node_modules client/node_modules server/node_modules client/package-lock.json server/package-lock.json",
+    "audit:prod": "npm audit --omit=dev",
+    "start": "npm -w server run start",
+    "test": "npm -w server run test && npm -w client run test",
+    "test:server": "npm -w server run test",
+    "test:client": "npm -w client run test",
+    "lint": "eslint .",
+    "lint:syntax": "npm -w server run lint",
+    "e2e": "playwright test --config e2e/playwright.config.js",
+    "e2e:install": "playwright install chromium",
+    "build:prod": "PRERENDER_STRICT=true npm -w client run build"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "overrides": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "eslint": "^9.14.0",
+    "@eslint/js": "^9.14.0",
+    "globals": "^15.12.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0"
+  }
+}

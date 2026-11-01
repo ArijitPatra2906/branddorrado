@@ -1,0 +1,35 @@
+@tailwind base; @tailwind components; @tailwind utilities;
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-obsidian font-sans text-cream antialiased; }
+  h1, h2, h3 { @apply font-serif font-medium; font-size: clamp(2rem, 1.2rem + 3vw, 4.5rem); line-height: 1.05; }
+  :focus-visible { @apply outline outline-2 outline-offset-2 outline-gold; }
+}
+@layer components {
+  .btn-gold { @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-obsidian transition hover:bg-gold-deep hover:text-cream; }
+  .btn-outline { @apply inline-flex items-center justify-center gap-2 rounded-full border border-gold/60 px-6 py-3 text-sm font-semibold text-cream transition hover:border-gold hover:text-gold; }
+  .btn-dark { @apply inline-flex items-center justify-center gap-2 rounded-full bg-obsidian px-6 py-3 text-sm font-semibold text-cream transition hover:bg-gold-deep; }
+  .eyebrow { @apply text-xs font-medium uppercase tracking-[0.3em] text-gold; }
+}
+/* Content is visible by default; hiding only happens after JS marks an element as reveal-pending. */
+.reveal-pending { opacity: 0; transform: translateY(18px); }
+.reveal-done { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s ease; }
+@keyframes hero-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.hero-in { animation: hero-in .9s ease both; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal-pending { opacity: 1; transform: none; }
+}
+/* Fades the hero artwork into the dark background on its left and top edges. */
+.hero-art-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 16%), linear-gradient(to bottom, transparent, #000 20%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 16%), linear-gradient(to bottom, transparent, #000 20%);
+  mask-composite: intersect;
+}
+
+@layer components {
+  .field { @apply w-full rounded-lg border border-gold/35 bg-[#161616] px-3.5 py-2.5 text-sm text-cream placeholder:text-cream/40 focus-visible:border-gold; }
+  .label { @apply mb-1.5 block text-xs font-medium uppercase tracking-wider text-cream/70; }
+}
