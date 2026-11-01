@@ -25,8 +25,6 @@ const LOCAL_MEDIA = /^https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?\/media\//;
 // Uploaded files are saved with the address the server knew itself by (http://localhost:4000/media/...). On another device
 // that address does not work, so links coming from the API are pointed at the address this page uses for the API...
 export function localizeMedia(value) {
-    if (!r.onLan)
-        return value;
     if (typeof value === 'string')
         return LOCAL_MEDIA.test(value) ? value.replace(LOCAL_MEDIA, `${API_ORIGIN}/media/`) : value;
     if (Array.isArray(value))
